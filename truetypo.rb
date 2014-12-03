@@ -7,11 +7,11 @@ require 'text/hyphen'
 module General
 
   def ellipsis(input)
-    input.gsub(/\.\.\./) { |s| "…" }
+    input.gsub(/\.\.\./) { "…" }
   end
 
   def emdash_spaces(input)
-    input.gsub(/ (—|--) /) { |s| " — " }
+    input.gsub(/ (—|--) /) { " — " }
   end
 
   def add_soft_hyphens(input, lang = "en_us", left = 2, right = 2, char = "­")
