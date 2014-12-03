@@ -31,6 +31,11 @@ module General
     input.gsub(/\d+x/) { |s| s[0..-2] + "×"}
   end
 
+  def fix_brackets_whitespace(input)
+    output = input.gsub(/\s*[\(\[\{]\s*/) { |s| " " + s.strip }
+    output = output.gsub(/\s*[\]\)\}]\s*/) { |s| s.strip + " " }
+  end
+
 end
 
 module Czech
@@ -43,6 +48,7 @@ module Czech
     output = one_character_words(output)
     output = fix_double_quotes(output, "„", "“")
     output = fix_single_quotes(output, "‚", "‘")
+    output = fix_brackets_whitespace(output)
     output = fix_times(output)
   end
 
