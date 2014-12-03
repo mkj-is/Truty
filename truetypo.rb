@@ -16,15 +16,15 @@ module General
 
   def add_soft_hyphens(input, lang = "en_us", left = 2, right = 2, char = "­")
     l = Text::Hyphen.new(:language => lang, :left => left, :right => right)
-    l.visualise(input, "~")
+    l.visualise(input, char)
   end
 
   def fix_double_quotes(input, start_quotes = "“", end_quotes = "”")
-    input.gsub(/"[^"]*"/) { |s| start_quotes + s[1..-2] + end_quotes }
+    input.gsub(/"[^"]*"/) { |s| start_quotes + s[1..-2].strip + end_quotes }
   end
 
   def fix_single_quotes(input, start_quotes = "‘", end_quotes = "’")
-    input.gsub(/'[^']*'/) { |s| start_quotes + s[1..-2] + end_quotes }
+    input.gsub(/'[^']*'/) { |s| start_quotes + s[1..-2].strip + end_quotes }
   end
 
   def fix_times(input)
