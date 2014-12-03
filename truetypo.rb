@@ -16,7 +16,7 @@ module General
 
   def add_soft_hyphens(input, lang = "en_us", left = 2, right = 2, char = "­")
     l = Text::Hyphen.new(:language => lang, :left => left, :right => right)
-    l.visualise(input, char)
+    l.visualise(input, "~")
   end
 
   def fix_double_quotes(input, start_quotes = "“", end_quotes = "”")
@@ -33,7 +33,7 @@ module Czech
 
   def czech(input)
     output = input
-    output = add_soft_hyphens(output, "cs", 2, 2, "-")
+    output = add_czech_soft_hyphens(output, 2, 2)
     output = ellipsis(output)
     output = emdash_spaces(output)
     output = one_character_words(output)
@@ -43,6 +43,27 @@ module Czech
 
   def one_character_words(input)
     input.gsub(/\W[aikosuvAIKOSUV] /) { |s| " " + s.strip + " "}
+  end
+
+  def add_czech_soft_hyphens(input, left = 2, right = 2, char = "­")
+    l = Text::Hyphen.new(:language => "cs", :left => left, :right => right)
+    words = l.visualise(input, char).split(/\s+/m)
+    n = 0
+    words.each do |w|
+      for i in (w.length - right)..w.length do
+        if w[i] == char
+          w[i] = ""
+        end
+      end
+      for i in 0..left do
+        if w[i] == char
+          w[i] = ""
+        end
+      end
+      words[n] = w
+      n += 1
+    end
+    words.join(" ")
   end
 
 end
