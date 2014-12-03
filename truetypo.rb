@@ -42,7 +42,7 @@ module Czech
   end
 
   def one_character_words(input)
-    input.gsub(/ [aikosuvAIKOSUV] /) { |s| " " + s.strip + " "}
+    input.gsub(/\W[aikosuvAIKOSUV] /) { |s| " " + s.strip + " "}
   end
 
 end
