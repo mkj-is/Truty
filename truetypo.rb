@@ -1,6 +1,13 @@
 #!/usr/bin/ruby
 
 # Requires the text-hyphen gem (tested with ruby 2.1.5 and gem version 1.4.1)
+# ohakovani.cz
+# TODO:
+#  - x mezi cisly
+#  - pomlcky/spojovniky mezi cisly
+#  - koruny ,-
+#  - nbsp after ndash
+#  - thin space between numbers
 
 require 'text/hyphen'
 
