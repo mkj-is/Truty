@@ -27,6 +27,10 @@ module General
     input.gsub(/'[^']*'/) { |s| start_quotes + s[1..-2] + end_quotes }
   end
 
+  def fix_times(input)
+    input.gsub(/\d+x/) { |s| s[0..-2] + "×"}
+  end
+
 end
 
 module Czech
@@ -39,6 +43,7 @@ module Czech
     output = one_character_words(output)
     output = fix_double_quotes(output, "„", "“")
     output = fix_single_quotes(output, "‚", "‘")
+    output = fix_times(output)
   end
 
   def one_character_words(input)
