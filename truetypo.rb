@@ -50,6 +50,11 @@ module General
     input.gsub(/\s*[\!\?\.,;:…]\s*/) { |s| s.strip + " " }
   end
 
+  def fix_percentage(input)
+    output = input.gsub(/\d+ %/) { |s| s[0..s.length - 3] + " %" }
+    output = output.gsub(/\d+ ‰/) { |s| s[0..s.length - 3] + " ‰" }
+  end
+
 end
 
 module Czech
@@ -66,6 +71,7 @@ module Czech
     output = fix_single_quotes(output, "‚", "‘")
     output = fix_times(output)
     output = one_character_words(output)
+    output = fix_percentage(output)
   end
 
   def one_character_words(input)
