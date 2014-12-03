@@ -56,14 +56,14 @@ module Czech
 
   def czech(input)
     output = input
-    output = add_czech_soft_hyphens(output)
     output = ellipsis(output)
     output = fix_multicharacters(output)
     output = fix_punctuation_whitespace(output)
+    output = fix_brackets_whitespace(output)
+    output = add_czech_soft_hyphens(output)
     output = emdash_spaces(output)
     output = fix_double_quotes(output, "„", "“")
     output = fix_single_quotes(output, "‚", "‘")
-    output = fix_brackets_whitespace(output)
     output = fix_times(output)
     output = one_character_words(output)
   end
