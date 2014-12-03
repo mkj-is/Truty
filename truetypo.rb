@@ -45,6 +45,11 @@ module General
     output = output.gsub(/\+-/) { "±" }
     output = output.gsub(/-\+/) { "∓" }
   end
+
+  def fix_punctuation_whitespace(input)
+    input.gsub(/\s*[\!\?\.,;:…]\s*/) { |s| s.strip + " " }
+  end
+
 end
 
 module Czech
@@ -54,6 +59,7 @@ module Czech
     output = add_czech_soft_hyphens(output)
     output = ellipsis(output)
     output = fix_multicharacters(output)
+    output = fix_punctuation_whitespace(output)
     output = emdash_spaces(output)
     output = fix_double_quotes(output, "„", "“")
     output = fix_single_quotes(output, "‚", "‘")
