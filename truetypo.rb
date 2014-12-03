@@ -42,18 +42,18 @@ module Czech
 
   def czech(input)
     output = input
-    output = add_czech_soft_hyphens(output, 2, 2)
+    output = add_czech_soft_hyphens(output)
     output = ellipsis(output)
     output = emdash_spaces(output)
-    output = one_character_words(output)
     output = fix_double_quotes(output, "„", "“")
     output = fix_single_quotes(output, "‚", "‘")
     output = fix_brackets_whitespace(output)
     output = fix_times(output)
+    output = one_character_words(output)
   end
 
   def one_character_words(input)
-    input.gsub(/\W[aikosuvAIKOSUV] /) { |s| " " + s.strip + " "}
+    input.gsub(/\W[aikosuvz] /i) { |s| s[0..1] + " "}
   end
 
   def add_czech_soft_hyphens(input, left = 2, right = 2, char = "­")
