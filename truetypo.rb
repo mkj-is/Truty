@@ -36,6 +36,15 @@ module General
     output = output.gsub(/\s*[\]\)\}]\s*/) { |s| s.strip + " " }
   end
 
+  def fix_multicharacters(input)
+    output = input.gsub(/\([Cc]\)/) { "©" }
+    output = output.gsub(/\([Pp]\)/) { "℗" }
+    output = output.gsub(/\([Rr]\)/) { "®" }
+    output = output.gsub(/\((SM|sm)\)/) { "℠" }
+    output = output.gsub(/\((TM|tm)\)/) { "™" }
+    output = output.gsub(/\+-/) { "±" }
+    output = output.gsub(/-\+/) { "∓" }
+  end
 end
 
 module Czech
@@ -44,6 +53,7 @@ module Czech
     output = input
     output = add_czech_soft_hyphens(output)
     output = ellipsis(output)
+    output = fix_multicharacters(output)
     output = emdash_spaces(output)
     output = fix_double_quotes(output, "„", "“")
     output = fix_single_quotes(output, "‚", "‘")
