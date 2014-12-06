@@ -21,6 +21,10 @@ module General
     input.gsub(/ (—|--) /) { " — " }
   end
 
+  def endash_spaces(input)
+    input.gsub(/ – /) { " – " }
+  end
+
   def add_soft_hyphens(input, lang = "en_us", left = 2, right = 2, char = "­")
     l = Text::Hyphen.new(:language => lang, :left => left, :right => right)
     l.visualise(input, char)
@@ -74,6 +78,7 @@ module Czech
     output = fix_brackets_whitespace(output)
     output = add_czech_soft_hyphens(output)
     output = emdash_spaces(output)
+    output = endash_spaces(output)
     output = fix_double_quotes(output, "„", "“")
     output = fix_single_quotes(output, "‚", "‘")
     output = fix_times(output)
