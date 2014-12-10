@@ -9,6 +9,7 @@
 #  - nbsp after ndash
 #  - thin space between numbers
 
+require 'uri'
 require 'text/hyphen'
 
 module General
@@ -92,9 +93,10 @@ module Czech
 
   def add_czech_soft_hyphens(input, left = 2, right = 2, char = "­")
     l = Text::Hyphen.new(:language => "cs", :left => left, :right => right)
-    words = l.visualise(input, char).split(/\s+/m)
+    words = l.visualise(input, char).split(/[ ]+/m)
     n = 0
     words.each do |w|
+      next if w =~ URI::regexp || w =~ /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
       for i in (w.length - right)..w.length do
         if w[i] == char
           w[i] = ""
