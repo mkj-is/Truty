@@ -75,8 +75,8 @@ module Czech
     output = input
     output = ellipsis(output)
     output = fix_multicharacters(output)
-    output = fix_punctuation_whitespace(output)
     output = fix_brackets_whitespace(output)
+    output = fix_punctuation_whitespace(output)
     output = add_czech_soft_hyphens(output)
     output = emdash_spaces(output)
     output = endash_spaces(output)
