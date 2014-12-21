@@ -26,8 +26,11 @@ module General
     input.gsub(/'[^']*'/) { |s| start_quotes + s[1..-2].strip + end_quotes }
   end
 
-  def fix_times(input)
-    input.gsub(/\d+x/) { |s| s[0..-2] + "×"}
+  def fix_multiplication_sign(input)
+    output = input.gsub(/(\d+)\s{0,1}[Xx]\s{0,1}(\d+)/, '\1 × \2')
+    output = output.gsub(/(\d+)[Xx]/, '\1×')
+  end
+
   end
 
   def fix_brackets_whitespace(input)

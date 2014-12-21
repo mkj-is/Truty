@@ -12,8 +12,8 @@ module Czech
     output = endash_spaces(output)
     output = fix_double_quotes(output, "„", "“")
     output = fix_single_quotes(output, "‚", "‘")
-    output = fix_times(output)
     output = one_character_words(output)
+    output = fix_multiplication_sign(output)
     output = fix_percentage(output)
     output = fix_unreadable_czech_numbers(input)
   end
