@@ -42,14 +42,14 @@ module General
     output = input.gsub(/\([Cc]\)/) { "©" }
     output = output.gsub(/\([Pp]\)/) { "℗" }
     output = output.gsub(/\([Rr]\)/) { "®" }
-    output = output.gsub(/\((SM|sm)\)/) { "℠" }
-    output = output.gsub(/\((TM|tm)\)/) { "™" }
+    output = output.gsub(/\((SM|sm|Sm)\)/) { "℠" }
+    output = output.gsub(/\((TM|tm|Tm)\)/) { "™" }
     output = output.gsub(/\+-/) { "±" }
     output = output.gsub(/-\+/) { "∓" }
   end
 
   def fix_punctuation_whitespace(input)
-    input.gsub(/\s*[\!\?\.,;:…]\s*/) { |s| s.strip + " " }
+    input.gsub(/\s*([\!\?\.,;:…]+)\s*/, '\1 ')
   end
 
   def fix_percentage(input)
