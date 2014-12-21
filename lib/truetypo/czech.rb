@@ -15,6 +15,7 @@ module Czech
     output = fix_times(output)
     output = one_character_words(output)
     output = fix_percentage(output)
+    output = fix_unreadable_czech_numbers(input)
   end
 
   def one_character_words(input)
@@ -43,6 +44,10 @@ module Czech
       n += 1
     end
     words.join(" ")
+  end
+
+  def fix_unreadable_czech_numbers(input)
+    input.gsub(/\d+/) { |n| n.scan(/\.{1,3}/).join(' ') }
   end
 
 end
