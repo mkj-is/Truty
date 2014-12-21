@@ -1,6 +1,6 @@
-#!/usr/bin/ruby
+#!/usr/bin/env ruby -rubygems
 
-require "./truetypolib.rb"
+require "truetypo"
 
 def main
   puts TrueTypo.czech(ARGF.read)
