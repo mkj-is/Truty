@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.description = "A string converter which aims to correct the typography."
   s.authors     = ["Matěj Kašpar Jirásek"]
   s.email       = 'matej.jirasek@me.com'
-  s.files       = ["lib/truetypo.rb"]
+  s.files        = Dir["{lib}/**/*.rb", "bin/*", "LICENSE", "*.md"]
   s.homepage    = 'https://github.com/mkj-is/TrueTypo'
   s.executables = ["truetypo"]
   s.license       = 'MIT'
