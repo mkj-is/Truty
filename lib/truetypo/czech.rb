@@ -12,14 +12,14 @@ module Czech
     output = endash_spaces(output)
     output = fix_double_quotes(output, "„", "“")
     output = fix_single_quotes(output, "‚", "‘")
-    output = one_character_words(output)
     output = fix_multiplication_sign(output)
     output = fix_percentage(output)
     output = fix_unreadable_czech_numbers(input)
+    output = fix_czech_one_character_words(output)
   end
 
-  def one_character_words(input)
-    input.gsub(/\W[aikosuvz] /i) { |s| s[0..1] + " "}
+  def fix_czech_one_character_words(input)
+    input.gsub(/\b([aikosuvz])\s/i, '\1 ')
   end
 
   def add_czech_soft_hyphens(input, left = 2, right = 2, char = "­")
