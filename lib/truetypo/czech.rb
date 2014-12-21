@@ -15,7 +15,7 @@ module Czech
     output = fix_multiplication_sign(output)
     output = fix_space_between_numbers(output)
     output = fix_percentage(output)
-    output = fix_unreadable_czech_numbers(input)
+    output = fix_long_czech_numbers(output)
     output = fix_czech_one_character_words(output)
   end
 
@@ -47,8 +47,8 @@ module Czech
     words.join(" ")
   end
 
-  def fix_unreadable_czech_numbers(input)
-    input.gsub(/\d+/) { |n| n.scan(/\.{1,3}/).join(' ') }
+  def fix_long_czech_numbers(input)
+    input.gsub(/\d+/) { |n| n.reverse.scan(/(.{1,3})/).join(' ').reverse }
   end
 
 end
