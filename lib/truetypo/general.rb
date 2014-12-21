@@ -1,6 +1,26 @@
 
 module General
 
+  def fix(input, lang = "en_us")
+    input.split("\n").collect { |p| fix_paragraph(p, lang) }.join("\n")
+  end
+
+  def fix_paragraph(input, lang = "en_us")
+    output = input
+    output = ellipsis(output)
+    output = fix_multicharacters(output)
+    output = fix_brackets_whitespace(output)
+    output = fix_punctuation_whitespace(output)
+    output = add_soft_hyphens(output, lang)
+    output = emdash_spaces(output)
+    output = endash_spaces(output)
+    output = fix_double_quotes(output, "„", "“")
+    output = fix_single_quotes(output, "‚", "‘")
+    output = fix_multiplication_sign(output)
+    output = fix_space_between_numbers(output)
+    output = fix_percentage(output)
+  end
+
   def ellipsis(input)
     input.gsub(/\.\.\./) { "…" }
   end
