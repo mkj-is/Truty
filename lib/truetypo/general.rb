@@ -31,6 +31,8 @@ module General
     output = output.gsub(/(\d+)[Xx]/, '\1×')
   end
 
+  def fix_space_between_numbers(input)
+    input.gsub(/(\d)\s+(\d)/, '\1 \2')
   end
 
   def fix_brackets_whitespace(input)
