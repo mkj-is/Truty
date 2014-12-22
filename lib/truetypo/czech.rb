@@ -26,9 +26,9 @@ module Czech
   def add_czech_soft_hyphens(input, left = 2, right = 2, char = "­")
     l = Text::Hyphen.new(:language => "cs", :left => left, :right => right)
     words = input.split(/[ ]+/m)
-    n = 0
-    words.each do |w|
-      if !(w.length < 6 || w =~ URI::regexp || w =~ /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i)
+    result = []
+    words.each_with_index do |w, n|
+      if !(w.length < 6 || n == words.size - 1 || w =~ URI::regexp || w =~ /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i)
         w = l.visualise(w, char)
       end
       for i in (w.length - right)..w.length do
@@ -41,10 +41,9 @@ module Czech
           w[i] = ""
         end
       end
-      words[n] = w
-      n += 1
+      result << w
     end
-    words.join(" ")
+    result.join(" ")
   end
 
   def fix_long_czech_numbers(input)

@@ -19,6 +19,7 @@ module General
     output = fix_multiplication_sign(output)
     output = fix_space_between_numbers(output)
     output = fix_percentage(output)
+    output = fix_widows(output)
   end
 
   def ellipsis(input)
@@ -77,6 +78,10 @@ module General
   def fix_percentage(input)
     output = input.gsub(/\d+ %/) { |s| s[0..s.length - 3] + " %" }
     output = output.gsub(/\d+ ‰/) { |s| s[0..s.length - 3] + " ‰" }
+  end
+
+  def fix_widows(input)
+    input.gsub(/(\s)(\S+(\$|\z))/, ' \2')
   end
 
 end
