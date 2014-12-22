@@ -13,11 +13,11 @@ class TrueTypoTest < Test::Unit::TestCase
 
   def test_czech_hyphenation_short_words
     words = 'Vstříc, FAMU, např., apod., oběd, éter, Ivan, .'
-    assert_equal words, TrueTypo::add_czech_soft_hyphens(words)
+    assert_equal words, TrueTypo::add_soft_hyphens(words, "cs")
   end
 
   def test_czech_hyphenation_long_words
-    assert_not_equal 'jedenáctka, řeholník, slevnění, sardinka a typografie', TrueTypo::add_czech_soft_hyphens('jedenáctka, řeholník, slevnění, sardinka a typografie')
+    assert_not_equal 'jedenáctka, řeholník, slevnění, sardinka a typografie', TrueTypo::add_soft_hyphens('jedenáctka, řeholník, slevnění, sardinka a typografie', 'cs')
   end
 
   def test_czech_abbreviations
