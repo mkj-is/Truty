@@ -1,6 +1,5 @@
 
-require 'test/unit'
-require 'truetypo'
+require 'test_helper'
 
 class TrueTypoTest < Test::Unit::TestCase
 
