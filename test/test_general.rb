@@ -40,4 +40,8 @@ class TrueTypoTest < Test::Unit::TestCase
     assert_equal "This is a sentence (and some more information). (Whole sentence.) No way. {10 + [5 + (10 - 2) + (x + y) - 555] + [45 + (30 - 3) + 5] + 55}", TrueTypo::fix_brackets_whitespace("This is a sentence (   and some more information  ). (Whole sentence. )  No way. {  10 + [ 5 + (    10 - 2) +    (  x + y ) - 555 ] + [ 45 + ( 30 - 3 ) + 5   ]   + 55 }")
   end
 
+  def test_trailing_spaces
+    assert_equal "This is a test paragraph.", TrueTypo::fix_trailing_spaces("This is a test paragraph.      ")
+  end
+
 end

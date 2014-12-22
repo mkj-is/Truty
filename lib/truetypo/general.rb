@@ -19,6 +19,7 @@ module General
     output = fix_multiplication_sign(output)
     output = fix_space_between_numbers(output)
     output = fix_units(output)
+    output = fix_trailing_spaces(output)
     output = fix_widows(output)
   end
 
@@ -87,6 +88,10 @@ module General
 
   def fix_widows(input)
     input.gsub(/(\s)(\S+(\$|\z))/, ' \2')
+  end
+
+  def fix_trailing_spaces(input)
+    input.gsub(/\s*($|\z)/, '')
   end
 
 end

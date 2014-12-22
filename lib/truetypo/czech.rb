@@ -15,6 +15,8 @@ module Czech
     output = fix_multiplication_sign(output)
     output = fix_space_between_numbers(output)
     output = fix_units(output)
+    output = fix_trailing_spaces(output)
+    output = fix_widows(output)
     output = fix_long_czech_numbers(output)
     output = fix_czech_one_character_words(output)
     output = fix_czech_abbreviations(output)
