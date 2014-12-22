@@ -5,6 +5,7 @@ class TrueTypoTest < Test::Unit::TestCase
 
   def test_return_type
     assert_true TrueTypo::fix('test').is_a? String
+  end
 
   def test_ellipsis
     assert_equal "Nuda… Nuda… Ach, to je nuda…", TrueTypo::ellipsis("Nuda... Nuda.... Ach, to je nuda......")
@@ -42,6 +43,27 @@ class TrueTypoTest < Test::Unit::TestCase
 
   def test_trailing_spaces
     assert_equal "This is a test paragraph.", TrueTypo::fix_trailing_spaces("This is a test paragraph.      ")
+  end
+
+  def test_hyphenation
+    text = 'One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin.'
+    assert_true text.length < TrueTypo::add_soft_hyphens(text).length
+  end
+
+  def test_double_quotes
+    assert_equal '“Hello,” he said, “I come from the deep ocean.” “Pretty cool!” she answered.', TrueTypo::fix_double_quotes('"Hello," he said, "I come from the deep ocean." "Pretty cool!" she answered.')
+  end
+
+  def test_single_quotes
+    assert_equal "\"‘Hello,’ he said, ‘I come from the deep ocean.’ ‘Pretty cool!’ she answered. And that was their story from my point of view.\"", TrueTypo::fix_single_quotes("\"'Hello,' he said, 'I come from the deep ocean.' 'Pretty cool!' she answered. And that was their story from my point of view.\"")
+  end
+
+  def test_punctuation
+    assert_equal 'Hello! How are you? Boring… Still; Not: Angry. ', TrueTypo::fix_punctuation_whitespace('Hello   ! How are you ?  Boring   …   Still ;  Not: Angry   .')
+  end
+
+  def test_space_between_numbers
+    assert_equal '1 000 000, +420 737 87 97 17', TrueTypo::fix_space_between_numbers('1 000 000, +420 737 87 97 17')
   end
 
 end

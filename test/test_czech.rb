@@ -17,7 +17,7 @@ class TrueTypoTest < Test::Unit::TestCase
   end
 
   def test_czech_hyphenation_long_words
-    assert_not_equal 'jedenáctka, řeholník, slevnění, sardinka a typografie', TrueTypo::czech('jedenáctka, řeholník, slevnění, sardinka a typografie')
+    assert_not_equal 'jedenáctka, řeholník, slevnění, sardinka a typografie', TrueTypo::add_czech_soft_hyphens('jedenáctka, řeholník, slevnění, sardinka a typografie')
   end
 
   def test_czech_abbreviations
