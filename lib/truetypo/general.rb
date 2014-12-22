@@ -18,7 +18,7 @@ module General
     output = fix_single_quotes(output, "‚", "‘")
     output = fix_multiplication_sign(output)
     output = fix_space_between_numbers(output)
-    output = fix_percentage(output)
+    output = fix_units(output)
     output = fix_widows(output)
   end
 
@@ -62,22 +62,25 @@ module General
   end
 
   def fix_multicharacters(input)
-    output = input.gsub(/\([Cc]\)/) { "©" }
-    output = output.gsub(/\([Pp]\)/) { "℗" }
-    output = output.gsub(/\([Rr]\)/) { "®" }
-    output = output.gsub(/\((SM|sm|Sm)\)/) { "℠" }
-    output = output.gsub(/\((TM|tm|Tm)\)/) { "™" }
-    output = output.gsub(/\+-/) { "±" }
-    output = output.gsub(/-\+/) { "∓" }
+    output = input.gsub(/\([Cc]\)/, "©")
+    output = output.gsub(/\([Pp]\)/, "℗")
+    output = output.gsub(/\([Rr]\)/, "®")
+    output = output.gsub(/\((SM|sm|Sm)\)/, "℠")
+    output = output.gsub(/\((TM|tm|Tm)\)/, "™")
+    output = output.gsub(/\+-/, "±")
+    output = output.gsub(/-\+/, "∓")
+    output = output.gsub(/No.?\s*(\d+)/i, '№\1')
+    output = output.gsub(/°C/, '℃')
+    output = output.gsub(/°F/, '℉')
   end
 
   def fix_punctuation_whitespace(input)
     input.gsub(/\s*([\!\?\.,;:…]+)\s*/, '\1 ')
   end
 
-  def fix_percentage(input)
-    output = input.gsub(/\d+ %/) { |s| s[0..s.length - 3] + " %" }
-    output = output.gsub(/\d+ ‰/) { |s| s[0..s.length - 3] + " ‰" }
+  def fix_units(input)
+    output = input.gsub(/(\d+)\s+(%|‰|‱|℃|℉|°|€|Kč|(Y|Z|E|P|T|G|M|k|h|da|d|m|µ|n|p|f|a|z|y)?(m(²|³)?|g|s|h|A|K|cd|mol|Ω|℃|℉))/, '\1 \2')
+    output.gsub(/(\*|§|#|†)\s+(\d+)/, '\1 \2')
   end
 
   def fix_widows(input)

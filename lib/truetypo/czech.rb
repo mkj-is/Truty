@@ -14,7 +14,7 @@ module Czech
     output = fix_single_quotes(output, "‚", "‘")
     output = fix_multiplication_sign(output)
     output = fix_space_between_numbers(output)
-    output = fix_percentage(output)
+    output = fix_units(output)
     output = fix_long_czech_numbers(output)
     output = fix_czech_one_character_words(output)
     output = fix_czech_abbreviations(output)

@@ -17,4 +17,8 @@ class TrueTypoTest < Test::Unit::TestCase
     assert_equal paragraph_without_widow, TrueTypo::fix_widows(paragraph)
   end
 
+  def test_units
+    assert_equal "50 %, § 23, # 26, * 1921, † 2000, 100 m², 10 kg, 19 ℃, 1 000 000 Kč, 250 €", TrueTypo::fix_units("50  %, § 23, # 26, *  1921, † 2000, 100 m², 10 kg, 19 ℃, 1 000 000  Kč, 250 €")
+  end
+
 end
