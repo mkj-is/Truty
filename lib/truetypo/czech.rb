@@ -31,16 +31,6 @@ module Czech
       if !(w.length < 6 || n == words.size - 1 || w =~ URI::regexp || w =~ /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i)
         w = l.visualise(w, char)
       end
-      for i in (w.length - right)..w.length do
-        if w[i] == char
-          w[i] = ""
-        end
-      end
-      for i in 0..left do
-        if w[i] == char
-          w[i] = ""
-        end
-      end
       result << w
     end
     result.join(" ")
