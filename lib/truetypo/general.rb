@@ -9,8 +9,8 @@ module General
     output = input
     output = ellipsis(output)
     output = fix_multicharacters(output)
-    output = fix_brackets_whitespace(output)
     output = fix_punctuation_whitespace(output)
+    output = fix_brackets_whitespace(output)
     output = add_soft_hyphens(output, lang)
     output = emdash_spaces(output)
     output = endash_spaces(output)
@@ -23,15 +23,15 @@ module General
   end
 
   def ellipsis(input)
-    input.gsub(/\.\.\./) { "…" }
+    input.gsub(/\.{3,}/, "…")
   end
 
   def emdash_spaces(input)
-    input.gsub(/ (—|--) /) { " — " }
+    input.gsub(/\s+(—|-{2,3})\s+/, " — ")
   end
 
   def endash_spaces(input)
-    input.gsub(/ – /) { " – " }
+    input.gsub(/\s+(–|-)\s+/, " – ")
   end
 
   def add_soft_hyphens(input, lang = "en_us", left = 2, right = 2, char = "­")
@@ -57,8 +57,10 @@ module General
   end
 
   def fix_brackets_whitespace(input)
-    output = input.gsub(/\s*[\(\[\{]\s*/) { |s| " " + s.strip }
-    output = output.gsub(/\s*[\]\)\}]\s*/) { |s| s.strip + " " }
+    output = input.gsub(/([\(\[\{])\s*/, '\1')
+    output = output.gsub(/\s*([\]\)\}])/, '\1')
+    output = output.gsub(/\s+([\(\[\{])\s*/, ' \1')
+    output = output.gsub(/\s*([\]\)\}])\s+/, '\1 ')
   end
 
   def fix_multicharacters(input)
