@@ -4,7 +4,7 @@ require 'test_helper'
 class TrutyTest < Test::Unit::TestCase
 
   def test_return_type
-    assert_true Truty::fix('test').is_a? String
+    assert Truty::fix('test').is_a? String
   end
 
   def test_ellipsis
@@ -47,7 +47,7 @@ class TrutyTest < Test::Unit::TestCase
 
   def test_hyphenation
     text = 'One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin.'
-    assert_true text.length < Truty.add_soft_hyphens(text).length
+    assert text.length < Truty.add_soft_hyphens(text).length
   end
 
   def test_double_quotes
