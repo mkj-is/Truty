@@ -4,12 +4,12 @@ Gem::Specification.new do |s|
   s.version     = '0.1.1'
   s.platform    = Gem::Platform::RUBY
   s.summary     = "True typography converter"
-  s.description = "A string converter which aims to correct the typography."
+  s.description = "A string converter aiming to correct the typography of plain text."
   s.authors     = ["Matěj Kašpar Jirásek"]
   s.email       = 'matej.jirasek@me.com'
   s.files       = Dir["{lib}/**/*.rb", "bin/*", "LICENSE", "*.md"]
   s.homepage    = 'https://github.com/mkj-is/Truty'
-  s.bindir      = 'bin'
+  s.executables << 'truty'
   s.license     = 'MIT'
 
   s.required_ruby_version = '>= 2.0.0'

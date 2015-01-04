@@ -3,7 +3,12 @@
 require "truty"
 
 def main
-  puts Truty.fix_czech_text(ARGF.read)
+  language = :general
+  if ARGV[0] == "-l" || ARGV[0] == "--language" then
+    language = ARGV[1]
+    ARGV.shift(2)
+  end
+  puts Truty.send :fix, ARGF.read, language
 end
 
 main
