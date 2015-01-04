@@ -7,6 +7,10 @@ class TrutyTest < Test::Unit::TestCase
     assert Truty.fix('test').is_a? String
   end
 
+  def test_non_existing_language
+    assert Truty.fix('test', :kokorean).is_a? String
+  end
+
   def test_ellipsis
     assert_equal "Nuda… Nuda… Ach, to je nuda…", Truty.ellipsis("Nuda... Nuda.... Ach, to je nuda......")
   end

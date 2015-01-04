@@ -11,7 +11,7 @@ module Truty
     # @param country [String] The country ("uk" or "us").
     # @return [String] Paragraph with improved typography.
     def english(input, country = "us")
-      input = add_soft_hyphens(input, "en_" + country)
+      input = soft_hyphens(input, "en_" + country)
       input = general(input)
       input = english_double_quotes(input)
       input = english_single_quotes(input)
