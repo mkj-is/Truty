@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby -rubygems
+
+require "truty"
+
+def main
+  puts Truty.fix_czech_text(ARGF.read)
+end
+
+main

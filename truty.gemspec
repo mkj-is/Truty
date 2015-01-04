@@ -1,6 +1,6 @@
 
 Gem::Specification.new do |s|
-  s.name        = 'truetypo'
+  s.name        = 'truty'
   s.version     = '0.0.1'
   s.platform    = Gem::Platform::RUBY
   s.summary     = "True typography converter"
@@ -8,8 +8,8 @@ Gem::Specification.new do |s|
   s.authors     = ["Matěj Kašpar Jirásek"]
   s.email       = 'matej.jirasek@me.com'
   s.files        = Dir["{lib}/**/*.rb", "bin/*", "LICENSE", "*.md"]
-  s.homepage    = 'https://github.com/mkj-is/TrueTypo'
-  s.executables = ["truetypo"]
+  s.homepage    = 'https://github.com/mkj-is/Truty'
+  s.executables = ["truty"]
   s.license       = 'MIT'
 
   s.add_dependency 'text-hyphen', '~> 1.4'

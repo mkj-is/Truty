@@ -2,10 +2,10 @@
 
 require 'uri'
 require 'text/hyphen'
-require 'truetypo/general'
-require 'truetypo/czech'
+require 'truty/general'
+require 'truty/czech'
 
-module TrueTypo
+module Truty
 
   extend General
   extend Czech
