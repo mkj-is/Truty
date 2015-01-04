@@ -12,8 +12,7 @@ require 'truty/czech'
 module Truty
 
   extend General
-  extend English
-  extend Czech
+  extend English, French, Czech
 
 end
 
