@@ -8,33 +8,31 @@ module Truty
     # Improves the typography of the large plain text with paragraphs. Adds non-breaking spaces, hyphenation, fixes dashes, etc.
     #
     # @param input [String] The text which will be converted.
-    # @param lang [String] Sets the language of hyphenation. (See {#add_soft_hyphens}.)
+    # @param lang [Symbol] Sets the language (english name like "czech", "german", etc.)
     # @return [String] Text with improved typography.
-    def fix(input, lang = "en_us")
-      input.split("\n").collect { |p| fix_paragraph(p, lang) }.join("\n")
+    def fix(input, lang = :general)
+      if not Truty.respond_to? lang then
+        lang = :general
+      end
+      input.split("\n").collect { |p| Truty.send lang, p }.join("\n")
     end
 
-    # Improves the typography of single paragraph. If you supply more paragraphs you might lose some improvements like widows. For improving longer text see {#fix}.
+    # Improves basic non-language specific issues in typography.
     #
     # @param input [String] The paragraph which will be converted.
-    # @param lang [String] Sets the language of hyphenation. (See {#add_soft_hyphens}.)
     # @return [String] Paragraph with improved typography.
-    def fix_paragraph(input, lang = "en_us")
-      output = input
-      output = ellipsis(output)
-      output = fix_multicharacters(output)
-      output = fix_punctuation_whitespace(output)
-      output = fix_brackets_whitespace(output)
-      output = add_soft_hyphens(output, lang)
-      output = emdash_spaces(output)
-      output = endash_spaces(output)
-      output = fix_double_quotes(output)
-      output = fix_single_quotes(output)
-      output = fix_multiplication_sign(output)
-      output = fix_space_between_numbers(output)
-      output = fix_units(output)
-      output = fix_trailing_spaces(output)
-      output = fix_widows(output)
+    def general(input)
+      input = ellipsis(input)
+      input = multicharacters(input)
+      input = punctuation_whitespace(input)
+      input = brackets_whitespace(input)
+      input = emdash(input)
+      input = endash(input)
+      input = multiplication_sign(input)
+      input = space_between_numbers(input)
+      input = units(input)
+      input = trailing_spaces(input)
+      input = widows(input)
     end
 
     # Converts three or more periods (dots, points) into ellipsis.
@@ -49,7 +47,7 @@ module Truty
     #
     # @param input [String] The paragraph which will be converted.
     # @return [String] Paragraph with corrected emdashes.
-    def emdash_spaces(input)
+    def emdash(input)
       input.gsub(/\s+(—|-{2,3})\s+/, " — ")
     end
 
@@ -57,7 +55,7 @@ module Truty
     #
     # @param input [String] The paragraph which will be converted.
     # @return [String] Paragraph with corrected endashes.
-    def endash_spaces(input)
+    def endash(input)
       input.gsub(/\s+(–|-)\s+/, " – ")
     end
 
@@ -69,7 +67,7 @@ module Truty
     # @param right [Integer] Number of characters on the beginning of the words which cannnot be hyphenated.
     # @param char [Integer] The character which will be added to hyphenation places.
     # @return [String] Paragraph with added hyphenation characters.
-    def add_soft_hyphens(input, lang = "en_us", left = 2, right = 2, char = "­")
+    def soft_hyphens(input, lang = "en_us", left = 2, right = 2, char = "­")
       l = Text::Hyphen.new(:language => lang, :left => left, :right => right)
       words = input.split(/[ ]+/m)
       result = []
@@ -89,32 +87,16 @@ module Truty
     # @param start_quotes [String] The character used for starting quotes.
     # @param end_quotes [String] The character used for ending quotes.
     # @return [String] Paragraph with correct double quotes.
-    def fix_quotes(input, type = '"', start_quotes = "“", end_quotes = "”")
+    def quotes(input, type = '"', start_quotes = "“", end_quotes = "”")
       regexp = Regexp.new(type + '[^' + type + ']*' + type)
       input.gsub(regexp) { |s| start_quotes + s[1..-2].strip + end_quotes }
-    end
-
-    # Converts single quotes to the typograhic ones.
-    #
-    # @param input [String] The paragraph which will be converted.
-    # @return [String] Paragraph with correct single quotes.
-    def fix_single_quotes(input)
-      fix_quotes(input, "'", "‘", "’")
-    end
-
-    # Converts double quotes to the typograhic ones.
-    #
-    # @param input [String] The paragraph which will be converted.
-    # @return [String] Paragraph with correct double quotes.
-    def fix_double_quotes(input)
-      fix_quotes(input, '"', "“", "”")
     end
 
     # Adds multiplication sign between numbers instead of X.
     #
     # @param input [String] The paragraph which will be converted.
     # @return [String] Paragraph with correct multiplication signs.
-    def fix_multiplication_sign(input)
+    def multiplication_sign(input)
       output = input.gsub(/(\d+)\s{0,1}[Xx]\s{0,1}(\d+)/, '\1 × \2')
       output = output.gsub(/(\d+)[Xx]/, '\1×')
     end
@@ -123,7 +105,7 @@ module Truty
     #
     # @param input [String] The paragraph which will be converted.
     # @return [String] Paragraph with correct spaces between numbers.
-    def fix_space_between_numbers(input)
+    def space_between_numbers(input)
       input.gsub(/(\d)\s+(\d)/, '\1 \2')
     end
 
@@ -131,7 +113,7 @@ module Truty
     #
     # @param input [String] The paragraph which will be converted.
     # @return [String] Paragraph with correct spaces around brackets.
-    def fix_brackets_whitespace(input)
+    def brackets_whitespace(input)
       output = input.gsub(/([\(\[\{])\s*/, '\1')
       output = output.gsub(/\s*([\]\)\}])/, '\1')
       output = output.gsub(/\s+([\(\[\{])\s*/, ' \1')
@@ -142,7 +124,7 @@ module Truty
     #
     # @param input [String] The paragraph which will be converted.
     # @return [String] Paragraph with converted characters.
-    def fix_multicharacters(input)
+    def multicharacters(input)
       output = input.gsub(/\([Cc]\)/, "©")
       output = output.gsub(/\([Pp]\)/, "℗")
       output = output.gsub(/\([Rr]\)/, "®")
@@ -159,7 +141,7 @@ module Truty
     #
     # @param input [String] The paragraph which will be converted.
     # @return [String] Paragraph with correct spaces around punctuation.
-    def fix_punctuation_whitespace(input)
+    def punctuation_whitespace(input)
       input.gsub(/\s*([\!\?\.,;:…]+)\s*/, '\1 ')
     end
 
@@ -167,7 +149,7 @@ module Truty
     #
     # @param input [String] The paragraph which will be converted.
     # @return [String] Paragraph with correct spaces between number and unit.
-    def fix_units(input)
+    def units(input)
       output = input.gsub(/(\d+)\s+(%|‰|‱|℃|℉|°|€|Kč|(Y|Z|E|P|T|G|M|k|h|da|d|m|µ|n|p|f|a|z|y)?(m(²|³)?|g|s|h|A|K|cd|mol|Ω|℃|℉))/, '\1 \2')
       output.gsub(/(\*|§|#|†)\s+(\d+)/, '\1 \2')
     end
@@ -176,7 +158,7 @@ module Truty
     #
     # @param input [String] The paragraph which will be converted.
     # @return [String] Paragraph with removed widows.
-    def fix_widows(input)
+    def widows(input)
       input.gsub(/(\s)(\S+(\$|\z))/, ' \2')
     end
 
@@ -184,7 +166,7 @@ module Truty
     #
     # @param input [String] The paragraph which will be converted.
     # @return [String] Paragraph without trailing spaces.
-    def fix_trailing_spaces(input)
+    def trailing_spaces(input)
       input.gsub(/\s*($|\z)/, '')
     end
 
