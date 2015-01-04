@@ -28,8 +28,8 @@ module Truty
       output = add_soft_hyphens(output, lang)
       output = emdash_spaces(output)
       output = endash_spaces(output)
-      output = fix_double_quotes(output, "„", "“")
-      output = fix_single_quotes(output, "‚", "‘")
+      output = fix_double_quotes(output)
+      output = fix_single_quotes(output)
       output = fix_multiplication_sign(output)
       output = fix_space_between_numbers(output)
       output = fix_units(output)
@@ -82,24 +82,32 @@ module Truty
       result.join(" ")
     end
 
-    # Converts simple double quotes to the typograhic ones.
+    # Converts quotes to the typograhic ones.
     #
     # @param input [String] The paragraph which will be converted.
+    # @param type [String] Character which will be substited for correct quotes.
     # @param start_quotes [String] The character used for starting quotes.
     # @param end_quotes [String] The character used for ending quotes.
     # @return [String] Paragraph with correct double quotes.
-    def fix_double_quotes(input, start_quotes = "“", end_quotes = "”")
-      input.gsub(/"[^"]*"/) { |s| start_quotes + s[1..-2].strip + end_quotes }
+    def fix_quotes(input, type = '"', start_quotes = "“", end_quotes = "”")
+      regexp = Regexp.new(type + '[^' + type + ']*' + type)
+      input.gsub(regexp) { |s| start_quotes + s[1..-2].strip + end_quotes }
     end
 
-    # Converts simple single quotes to the typograhic ones.
+    # Converts single quotes to the typograhic ones.
     #
     # @param input [String] The paragraph which will be converted.
-    # @param start_quotes [String] The character used for starting quotes.
-    # @param end_quotes [String] The character used for ending quotes.
     # @return [String] Paragraph with correct single quotes.
-    def fix_single_quotes(input, start_quotes = "‘", end_quotes = "’")
-      input.gsub(/'[^']*'/) { |s| start_quotes + s[1..-2].strip + end_quotes }
+    def fix_single_quotes(input)
+      fix_quotes(input, "'", "‘", "’")
+    end
+
+    # Converts double quotes to the typograhic ones.
+    #
+    # @param input [String] The paragraph which will be converted.
+    # @return [String] Paragraph with correct double quotes.
+    def fix_double_quotes(input)
+      fix_quotes(input, '"', "“", "”")
     end
 
     # Adds multiplication sign between numbers instead of X.
