@@ -3,6 +3,7 @@
 require 'uri'
 require 'text/hyphen'
 require 'truty/general'
+require 'truty/english'
 require 'truty/czech'
 
 # A Ruby library which is a simple string converter, which aims to fix all the typography imperfections of the plain text.
@@ -10,6 +11,7 @@ require 'truty/czech'
 module Truty
 
   extend General
+  extend English
   extend Czech
 
 end
