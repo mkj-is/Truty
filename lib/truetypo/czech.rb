@@ -23,7 +23,7 @@ module Czech
   end
 
   def fix_czech_one_character_words(input)
-    input.gsub(/\b([aikosuvz])\s/i, '\1 ')
+    input.gsub(/(\s+|^|\A)(([aikosuvz]\s+)+)/i) { |prep| $1 + $2.gsub(/\s+/, " ") }
   end
 
   def fix_long_czech_numbers(input)
