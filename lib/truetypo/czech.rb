@@ -1,7 +1,11 @@
 
 module Czech
 
-  def czech(input)
+  def fix_czech_text(input)
+    input.split("\n").collect { |p| fix_czech_paragraph(p) }.join("\n")
+  end
+
+  def fix_czech_paragraph(input)
     output = input
     output = ellipsis(output)
     output = fix_multicharacters(output)

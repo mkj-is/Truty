@@ -3,7 +3,7 @@
 require "truetypo"
 
 def main
-  puts TrueTypo.czech(ARGF.read)
+  puts TrueTypo.fix_czech_text(ARGF.read)
 end
 
 main()
