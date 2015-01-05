@@ -1,7 +1,7 @@
 
 Gem::Specification.new do |s|
   s.name        = 'truty'
-  s.version     = '0.2.0'
+  s.version     = '0.2.1'
   s.platform    = Gem::Platform::RUBY
   s.summary     = "True typography converter"
   s.description = "A string converter aiming to correct the typography of plain text."
