@@ -90,7 +90,7 @@ module Truty
     # @return [String] Paragraph with correct double quotes.
     def quotes(input, type = '"', start_quotes = "“", end_quotes = "”")
       regexp = Regexp.new(type + '[^' + type + ']*' + type)
-      input.gsub(regexp) { |s| start_quotes + s[1..-2].strip + end_quotes }
+      input.gsub(regexp) { |s| start_quotes + s[1..-2].gsub(/(^[\s ]+|[\s ]+$)/, "") + end_quotes }
     end
 
     # Adds multiplication sign between numbers instead of X.
