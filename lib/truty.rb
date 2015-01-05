@@ -3,6 +3,7 @@
 require 'uri'
 require 'text/hyphen'
 require 'truty/general'
+require 'truty/conversion'
 require 'truty/english'
 require 'truty/french'
 require 'truty/czech'
@@ -13,6 +14,7 @@ module Truty
 
   extend General
   extend English, French, Czech
+  extend Conversion
 
 end
 

@@ -4,11 +4,19 @@ require "truty"
 
 def main
   language = :general
-  if ARGV[0] == "-l" || ARGV[0] == "--language" then
-    language = ARGV[1]
-    ARGV.shift(2)
+  conversion = :none
+  while true do
+    if ARGV[0] == "-l" || ARGV[0] == "--language" then
+      language = ARGV[1]
+      ARGV.shift(2)
+    elsif ARGV[0] == "-c" || ARGV[0] == "--convert" then
+      conversion = ARGV[1]
+      ARGV.shift(2)
+    else
+      break
+    end
   end
-  puts Truty.send :fix, ARGF.read, language
+  puts Truty.send :convert, ARGF.read, conversion, language
 end
 
 main
