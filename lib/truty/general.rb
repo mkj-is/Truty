@@ -28,6 +28,7 @@ module Truty
       input = brackets_whitespace(input)
       input = emdash(input)
       input = endash(input)
+      input = name_abbreviations(input)
       input = multiplication_sign(input)
       input = space_between_numbers(input)
       input = units(input)
@@ -168,6 +169,10 @@ module Truty
     # @return [String] Paragraph without trailing spaces.
     def trailing_spaces(input)
       input.gsub(/\s*($|\z)/, '')
+    end
+
+    def name_abbreviations(input)
+      input.gsub(/(\s)(([A-Z]\.\s+)+)/) { $1 + $2.gsub(/ +/, " ")}
     end
 
   end
