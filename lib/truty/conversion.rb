@@ -13,9 +13,10 @@ module Truty
     # @param conversion [Symbol] Coversion type ("html" or "none")
     # @return [String] Fixed and converted text.
     def convert(input, conversion = :html, lang = :general)
-      if Truty.respond_to? conversion then
-        Truty.send(conversion, Truty.fix(input, lang))
+      if !Truty.respond_to? conversion then
+        conversion = :none
       end
+      Truty.send(conversion, Truty.fix(input, lang))
     end
 
     # Escapes string to HTML entities.
