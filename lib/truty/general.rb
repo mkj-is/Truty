@@ -171,6 +171,10 @@ module Truty
       input.gsub(/\s*($|\z)/, '')
     end
 
+    # Adds non-breaking space after one-character name abbreviation ("A.", "J.", etc.)
+    #
+    # @param input [String] The paragraph which will be converted.
+    # @return [String] Paragraph with non-breaking spaces after name abbreviations.
     def name_abbreviations(input)
       input.gsub(/(\s)(([A-Z]\.\s+)+)/) { $1 + $2.gsub(/ +/, " ")}
     end
