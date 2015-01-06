@@ -88,8 +88,8 @@ module Truty
     # @param start_quotes [String] The character used for starting quotes.
     # @param end_quotes [String] The character used for ending quotes.
     # @return [String] Paragraph with correct double quotes.
-    def quotes(input, type = '"', start_quotes = "“", end_quotes = "”")
-      regexp = Regexp.new(type + '[^' + type + ']*' + type)
+    def quotes(input, type = '"“”„', start_quotes = "“", end_quotes = "”")
+      regexp = Regexp.new('[' + type + '][^' + type + ']*[' + type + ']')
       input.gsub(regexp) { |s| start_quotes + s[1..-2].gsub(/(^[\s ]+|[\s ]+$)/, "") + end_quotes }
     end
 

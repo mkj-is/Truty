@@ -29,7 +29,7 @@ module Truty
     # @param input [String] The paragraph which will be converted.
     # @return [String] Paragraph with correct double quotes.
     def french_double_quotes(input)
-      quotes(input, "\"", "« ", " »")
+      quotes(input, '"“”„«»', "« ", " »")
     end
 
   end

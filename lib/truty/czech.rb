@@ -50,7 +50,7 @@ module Truty
     # @param input [String] The paragraph which will be converted.
     # @return [String] Paragraph with correct single quotes.
     def czech_single_quotes(input)
-      quotes(input, "'", "‚", "‘")
+      quotes(input, "'`", "‚", "‘")
     end
 
     # Converts double quotes to the typograhic ones.
@@ -58,7 +58,8 @@ module Truty
     # @param input [String] The paragraph which will be converted.
     # @return [String] Paragraph with correct double quotes.
     def czech_double_quotes(input)
-      quotes(input, "\"", "„", "“")
+      quotes(input, '"“”„', "„", "“")
+    end
 
     # Adds non-breaking space after number with period.
     #
