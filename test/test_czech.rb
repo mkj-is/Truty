@@ -8,7 +8,7 @@ class TrutyCzechTest < Test::Unit::TestCase
   end
 
   def test_long_czech_numbers
-    assert_equal '1, 12, 123, 1 234, 12 345, 123 456, 1 234 567, 12 345 678, 123 456 789, 0 123 456 789', Truty.czech_long_numbers('1, 12, 123, 1234, 12345, 123456, 1234567, 12345678, 123456789, 0123456789')
+    assert_equal '1, 12, 123, 1234, 12 345, 123 456, 1 234 567, 12 345 678, 123 456 789, 0 123 456 789', Truty.czech_long_numbers('1, 12, 123, 1234, 12345, 123456, 1234567, 12345678, 123456789, 0123456789')
   end
 
   def test_czech_hyphenation_short_words

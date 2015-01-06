@@ -32,7 +32,7 @@ module Truty
     # @param input [String] The paragraph which will be converted.
     # @return [String] Paragraph with spaces inside of long numbers.
     def czech_long_numbers(input)
-      input.gsub(/\d+/) { |n| n.reverse.scan(/(.{1,3})/).join(' ').reverse }
+      input.gsub(/\d{5,}/) { |n| n.reverse.scan(/(.{1,3})/).join(' ').reverse }
     end
 
     # Adds non-breaking spaces in and after Czech abbreviations.
