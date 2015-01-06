@@ -70,4 +70,8 @@ class TrutyTest < Test::Unit::TestCase
     assert_equal '1 000 000, +420 737 87 97 17', Truty.space_between_numbers('1 000 000, +420 737 87 97 17')
   end
 
+  def test_name_abbreviations
+    assert_equal 'J. van Koch, J. D., B. Pitt, J. R. R. Tolkien', Truty.name_abbreviations('J. van Koch, J. D., B. Pitt, J. R. R. Tolkien')
+  end
+
 end

@@ -176,7 +176,7 @@ module Truty
     # @param input [String] The paragraph which will be converted.
     # @return [String] Paragraph with non-breaking spaces after name abbreviations.
     def name_abbreviations(input)
-      input.gsub(/(\s)(([A-Z]\.\s+)+)/) { $1 + $2.gsub(/ +/, " ")}
+      input.gsub(/(\s|^)(([A-Z]\.\s+)+)/) { $1 + $2.gsub(/ +/, " ")}
     end
 
   end
