@@ -1,7 +1,7 @@
 
 require 'test_helper'
 
-class TrutyTest < Test::Unit::TestCase
+class TrutyGeneralTest < Test::Unit::TestCase
 
   def test_return_type
     assert Truty.fix('test').is_a? String

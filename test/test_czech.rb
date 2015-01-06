@@ -1,7 +1,7 @@
 
 require 'test_helper'
 
-class TrutyTest < Test::Unit::TestCase
+class TrutyCzechTest < Test::Unit::TestCase
 
   def test_one_character_words
     assert_equal 'S kluky v lese i u mostku a na dvoře. O prázdninách.', Truty.czech_prepositions('S kluky v lese i u mostku a na dvoře. O prázdninách.')
