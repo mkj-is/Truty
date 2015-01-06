@@ -12,6 +12,7 @@ module Truty
     def czech(input)
       input = soft_hyphens(input, "cs")
       input = general(input)
+      input = czech_dates(input)
       input = czech_double_quotes(input)
       input = czech_single_quotes(input)
       input = czech_long_numbers(input)
@@ -58,6 +59,13 @@ module Truty
     # @return [String] Paragraph with correct double quotes.
     def czech_double_quotes(input)
       quotes(input, "\"", "„", "“")
+
+    # Adds non-breaking space after number with period.
+    #
+    # @param input [String] The paragraph which will be converted.
+    # @return [String] Paragraph with non-breaking spaces after numbers.
+    def czech_dates(input)
+      input.gsub(/((\d+\. )+)/) { $1.gsub(/ /, " ") }
     end
 
   end
