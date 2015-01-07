@@ -28,7 +28,7 @@ The most simple way to install Truty is using Ruby gems.
 gem install truty
 ```
 
-## Usage
+## Usage
 
 The gem contains an executable. For now it has only one parameter, language. Other arguments are files which will be converted and outputted. If no file is supplied, then the standard input is converted.
 
@@ -67,7 +67,7 @@ Full documentation can be found here:
 
 http://www.rubydoc.info/gems/truty
 
-## Authors
+## Authors
 
 - [Matěj Kašpar Jirásek](https://github.com/mkj-is) (http://mkj.is)
 
