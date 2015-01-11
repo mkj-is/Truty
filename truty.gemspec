@@ -1,7 +1,7 @@
 
 Gem::Specification.new do |s|
   s.name        = 'truty'
-  s.version     = '0.4.0'
+  s.version     = '0.4.1'
   s.platform    = Gem::Platform::RUBY
   s.summary     = "True typography converter"
   s.description = "A string converter aiming to correct the typography of plain text."
@@ -19,5 +19,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'test-unit', '~> 3.0'
   s.add_development_dependency 'simplecov', '~> 0.9'
   s.add_development_dependency 'yard', '~> 0.8'
+  s.add_development_dependency 'rubygems-tasks', '~> 0.2'
 
 end

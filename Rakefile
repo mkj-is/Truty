@@ -1,5 +1,6 @@
 require 'rake/testtask'
 require 'yard'
+require 'rubygems/tasks'
 
 Rake::TestTask.new do |t|
   t.libs << 'test'
@@ -12,3 +13,5 @@ task :default do
   Rake::Task[:test].execute
   Rake::Task[:yard].execute
 end
+
+Gem::Tasks.new
