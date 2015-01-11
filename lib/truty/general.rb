@@ -133,7 +133,7 @@ module Truty
       output = output.gsub(/\((TM|tm|Tm)\)/, "™")
       output = output.gsub(/\+-/, "±")
       output = output.gsub(/-\+/, "∓")
-      output = output.gsub(/No.?\s*(\d+)/i, '№\1')
+      output = output.gsub(/N[oO]\.?\s*(\d+)/, '№\1')
       output = output.gsub(/°C/, '℃')
       output = output.gsub(/°F/, '℉')
     end

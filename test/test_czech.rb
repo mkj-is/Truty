@@ -47,4 +47,8 @@ Kříženec mezi Kubu a Portugalcem vrtěl hlavou. "Není, pane. Leda Devil Bay,
     assert_equal text.count("\n"), converted.count("\n")
   end
 
+  def test_no
+    assert_equal "je obklopeno 250 km", Truty.fix("je obklopeno 250 km")
+  end
+
 end
