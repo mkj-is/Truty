@@ -74,4 +74,12 @@ class TrutyGeneralTest < Test::Unit::TestCase
     assert_equal 'J. van Koch, J. D., B. Pitt, J. R. R. Tolkien', Truty.name_abbreviations('J. van Koch, J. D., B. Pitt, J. R. R. Tolkien')
   end
 
+  def test_weblinks
+    assert_equal 'google.cz, hola-hola.hr, www.mkj.is', Truty.fix('google.cz, hola-hola.hr, www.mkj.is')
+  end
+
+  def test_smileys
+    assert_equal 'Ahoj :) Jak se máš? :D', Truty.fix('Ahoj :) Jak se máš? :D')
+  end
+
 end

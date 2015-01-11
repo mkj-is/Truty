@@ -24,7 +24,6 @@ module Truty
     def general(input)
       input = ellipsis(input)
       input = multicharacters(input)
-      input = punctuation_whitespace(input)
       input = brackets_whitespace(input)
       input = emdash(input)
       input = endash(input)
