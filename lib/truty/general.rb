@@ -32,7 +32,6 @@ module Truty
       input = multiplication_sign(input)
       input = space_between_numbers(input)
       input = units(input)
-      input = trailing_spaces(input)
       input = widows(input)
     end
 
