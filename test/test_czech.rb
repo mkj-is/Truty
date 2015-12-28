@@ -51,4 +51,16 @@ Kříženec mezi Kubu a Portugalcem vrtěl hlavou. "Není, pane. Leda Devil Bay,
     assert_equal "je obklopeno 250 km", Truty.fix("je obklopeno 250 km")
   end
 
+  def test_time
+    assert_equal "32.15, 00.00", Truty.fix("32.15, 00.00")
+  end
+
+  def test_score
+    assert_equal "23:15, 1:1", Truty.fix("23:15, 1:1")
+  end
+
+  def test_scale
+    assert_equal "Měřítko je 10 : 1", Truty.fix("Měřítko je 10 : 1")
+  end
+
 end
