@@ -10,28 +10,31 @@ module Truty
     # @param input [String] The text which will be converted.
     # @param lang [Symbol] Sets the language (english name like "czech", "german", etc.)
     # @return [String] Text with improved typography.
-    def fix(input, lang = :general)
+    def fix(input, lang = :general, convert = [:all])
       if not Truty.respond_to? lang then
         lang = :general
       end
-      input.split("\n").collect { |p| Truty.send lang, p }.join("\n")
+      input.split("\n").collect { |p| Truty.send lang, p, convert }.join("\n")
     end
 
     # Improves basic non-language specific issues in typography.
     #
     # @param input [String] The paragraph which will be converted.
+    # @param convert [Array] Array of symbols with features that should be improved (possibilities: +all+, +hyphens+, +quotes+, +ellipsis+, +dashes+, +abbreviations+, +prepositions+, +numbers+, +dates+, +characters+, +brackets+, +multiplication+, +units+, +widows+)
     # @return [String] Paragraph with improved typography.
-    def general(input)
-      input = ellipsis(input)
-      input = multicharacters(input)
-      input = brackets_whitespace(input)
-      input = emdash(input)
-      input = endash(input)
-      input = name_abbreviations(input)
-      input = multiplication_sign(input)
-      input = space_between_numbers(input)
-      input = units(input)
-      input = widows(input)
+    def general(input, convert = [:all])
+      output = input
+      output = ellipsis(output) if (convert.include?(:all) || convert.include?(:ellipsis))
+      output = multicharacters(output) if (convert.include? (:all) || convert.include?(:characters))
+      output = brackets_whitespace(output) if (convert.include?(:all) || convert.include?(:brackets))
+      output = emdash(output) if (convert.include?(:all) || convert.include?(:dashes))
+      output = endash(output) if (convert.include?(:all) || convert.include?(:dashes))
+      output = name_abbreviations(output) if (convert.include?(:all) || convert.include?(:abbreviations))
+      output = multiplication_sign(output) if (convert.include?(:all) || convert.include?(:multiplication))
+      output = space_between_numbers(output) if (convert.include?(:all) || convert.include?(:numbers))
+      output = units(output) if (convert.include?(:all) || convert.include?(:units))
+      output = widows(output) if (convert.include?(:all) || convert.include?(:widows))
+      output
     end
 
     # Converts three or more periods (dots, points) into ellipsis.

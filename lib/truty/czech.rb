@@ -8,16 +8,19 @@ module Truty
     # Improves the Czech typography of single paragraph. If you supply more paragraphs you might lose some improvements like widows. For improving longer text see {General#fix}.
     #
     # @param input [String] The paragraph which will be converted.
+    # @param convert [Array] Array of symbols with features that should be improved (possibilities: +all+, +hyphens+, +quotes+, +ellipsis+, +dashes+, +abbreviations+, +prepositions+, +numbers+, +dates+, +characters+, +brackets+, +multiplication+, +units+, +widows+)
     # @return [String] Paragraph with improved typography.
-    def czech(input)
-      input = soft_hyphens(input, "cs")
-      input = general(input)
-      input = czech_dates(input)
-      input = czech_double_quotes(input)
-      input = czech_single_quotes(input)
-      input = czech_long_numbers(input)
-      input = czech_prepositions(input)
-      input = czech_abbreviations(input)
+    def czech(input, convert = [:all])
+      output = input
+      output = soft_hyphens(output, "cs") if (convert.include?(:all) || convert.include?(:hyphens))
+      output = general(output, convert)
+      output = czech_dates(output) if (convert.include?(:all) || convert.include?(:dates))
+      output = czech_double_quotes(output) if (convert.include?(:all) || convert.include?(:quotes))
+      output = czech_single_quotes(output) if (convert.include?(:all) || convert.include?(:quotes))
+      output = czech_long_numbers(output) if (convert.include?(:all) || convert.include?(:numbers))
+      output = czech_prepositions(output) if (convert.include?(:all) || convert.include?(:prepositions))
+      output = czech_abbreviations(output) if (convert.include?(:all) || convert.include?(:abbreviations))
+      output
     end
 
     # Adds non-breaking space after Czech one character prepostion.

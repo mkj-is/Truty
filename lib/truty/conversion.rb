@@ -10,13 +10,14 @@ module Truty
     # Fixes the typography and also converts the string.
     #
     # @param input [String] Text input.
-    # @param conversion [Symbol] Coversion type ("html" or "none")
+    # @param conversion [Symbol] Conversion type ("html" or "none")
+    # @param convert [Array] Array of symbols with features that should be improved (possibilities: +all+, +hyphens+, +quotes+, +ellipsis+, +dashes+, +abbreviations+, +prepositions+, +numbers+, +dates+, +characters+, +brackets+, +multiplication+, +units+, +widows+)
     # @return [String] Fixed and converted text.
-    def convert(input, conversion = :html, lang = :general)
+    def convert(input, conversion = :html, lang = :general, convert = [:all])
       if !Truty.respond_to? conversion then
         conversion = :none
       end
-      Truty.send(conversion, Truty.fix(input, lang))
+      Truty.send(conversion, Truty.fix(input, lang, convert))
     end
 
     # Escapes string to HTML entities.
