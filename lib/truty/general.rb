@@ -144,7 +144,7 @@ module Truty
       input.gsub(/\s*([\!\?\.,;:…]+)\s*/, '\1 ')
     end
 
-    # Fixes non-breaking spaces betwwen number and unit.
+    # Fixes non-breaking spaces between number and unit, mainly SI.
     #
     # @param input [String] The paragraph which will be converted.
     # @return [String] Paragraph with correct spaces between number and unit.

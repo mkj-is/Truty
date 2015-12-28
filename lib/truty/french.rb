@@ -13,18 +13,9 @@ module Truty
       input = soft_hyphens(input, "fr")
       input = general(input)
       input = french_double_quotes(input)
-      input = french_single_quotes(input)
     end
 
-    # Converts single quotes to the typograhic ones.
-    #
-    # @param input [String] The paragraph which will be converted.
-    # @return [String] Paragraph with correct single quotes.
-    def french_single_quotes(input)
-      quotes(input, "'", "‹ ", " ›")
-    end
-
-    # Converts double quotes to the typograhic ones.
+    # Converts double quotes to the typograhic ones, guillemets.
     #
     # @param input [String] The paragraph which will be converted.
     # @return [String] Paragraph with correct double quotes.
