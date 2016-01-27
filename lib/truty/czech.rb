@@ -12,7 +12,7 @@ module Truty
     # @return [String] Paragraph with improved typography.
     def czech(input, convert = [:all])
       output = input
-      output = soft_hyphens(output, "cs") if (convert.include?(:all) || convert.include?(:hyphens))
+      output = soft_hyphens(output, "cs", 3) if (convert.include?(:all) || convert.include?(:hyphens))
       output = general(output, convert)
       output = czech_dates(output) if (convert.include?(:all) || convert.include?(:dates))
       output = czech_double_quotes(output) if (convert.include?(:all) || convert.include?(:quotes))
