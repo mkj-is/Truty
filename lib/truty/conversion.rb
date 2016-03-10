@@ -59,7 +59,7 @@ module Truty
     def czech_html(input)
       coder = HTMLEntities.new
       encoded = coder.encode(input, :named, :decimal)
-      czech_diacritics.each { |k, v| encoded.sub!(k, v) }
+      czech_diacritics.each { |k, v| encoded.gsub!(k, v) }
       encoded
     end
 
