@@ -29,6 +29,40 @@ module Truty
       coder.encode(input, :named, :decimal)
     end
 
+    # Returns hash with Czech HTML entities as keys and values as their respective human readable versions.
+    #
+    # @return [Hash] Hash with entities.
+    def czech_diacritics
+      {
+        "&aacute;" => "á",
+        "&#269;" => "č",
+        "&#271;" => "ď",
+        "&eacute;" => "é",
+        "&#283;" => "ě",
+        "&iacute;" => "í",
+        "&#328;" => "ň",
+        "&oacute;" => "ó",
+        "&#345;" => "ř",
+        "&scaron;" => "š",
+        "&#357;" => "ť",
+        "&uacute;" => "ú",
+        "&#367;" => "ů",
+        "&yacute;" => "ý",
+        "&#382;" => "ž",
+      }
+    end
+
+    # Escapes string to readable Czech HTML entities.
+    #
+    # @param input [String] Text input.
+    # @return [String] Text with HTML entities.
+    def czech_html(input)
+      coder = HTMLEntities.new
+      encoded = coder.encode(input, :named, :decimal)
+      czech_diacritics.each { |k, v| encoded.sub!(k, v) }
+      encoded
+    end
+
     # Returns the input as it is.
     #
     # @param input [String] Input for conversion.

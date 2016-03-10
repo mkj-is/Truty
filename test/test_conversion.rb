@@ -15,6 +15,10 @@ class TrutyConversionTest < Test::Unit::TestCase
     assert_equal "&bdquo;&Aacute;le&ldquo;", Truty.convert("„Ále“", :html)
   end
 
+  def test_convert_czech_html
+    assert_equal "áčďéěíňóřšťúůýž", Truty.convert("áčďéěíňóřšťúůýž", :czech_html)
+  end
+
   def test_convert_other
     assert_equal "„Ále“", Truty.convert("„Ále“", :something)
   end
