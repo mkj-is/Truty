@@ -74,7 +74,7 @@ module Truty
       words = input.split(/[ ]+/m)
       result = []
       words.each_with_index do |w, n|
-        if !(w.length < 6 || n == words.size - 1 || w =~ URI::regexp || w =~ /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i)
+        if !(w.length < 6 || n == words.size - 1 || w =~ URI::REGEXP || w =~ /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i)
           w = l.visualise(w, char)
         end
         result << w
